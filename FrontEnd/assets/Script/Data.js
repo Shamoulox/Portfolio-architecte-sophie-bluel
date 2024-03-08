@@ -2,7 +2,7 @@
 async function loadingWorks() {
   const response = await fetch("http://localhost:5678/api/works");
   const works = await response.json();
-  console.log(works);
+  // console.log(works);
   return works; //retour des données recupérées
 }
 loadingWorks();
@@ -33,20 +33,44 @@ async function createItemsHtml() {
     img.src = Element.imageUrl;
     img.alt = Element.title;
     figcaption.innerText = Element.title;
- 
-});
+  });
 }
 createItemsHtml();
 
+//appel de la promesse et récupération des catégory
+const response = await fetch("http://localhost:5678/api/categories");
+const categories = await response.json();
+console.log(categories);
+
 // Récupération des constantes
-const portfolio = document.getElementById ("portfolio");
+const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
 
 // Creation des boutons et de la div
 const buttonFilter = document.createElement("div");
-buttonFilter.classList.add ("buttonFilter");
-// Placement de  la div apres portfolio
-portfolio.insertBefore (buttonFilter, gallery);
+buttonFilter.classList.add("buttonFilter");
+// Placement de  la div apres le portfolio
+portfolio.insertBefore(buttonFilter, gallery);
+
+//ajouter les differentes catégories de boutons
+categories.forEach((categoryElement, i) => {
+  //création d'un bouton par catégorie
+  const categoryButtonFilter = document.createElement("button");
+  categoryButtonFilter.innerText = categoryElement.id;
+  categoryButtonFilter.classList.add("btn-category");
+  // ajout de la classe selected
+  if (i === 0) {
+    categoryButtonFilter.classList.add("btn_selected");
+  }
+  // ajout des boutons dans la div
+  buttonFilter.appendChild(categoryButtonFilter);
+
+  //ajouter la catégories en fonction du clic (event listener)
+
+  //changer la galerie selon les filters
+
+  //changer la couleur des boutons et taille des boutons
+});
 
 // .then(response => console.log(respponse))
 //   .then(response => {
