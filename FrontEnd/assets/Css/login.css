@@ -1,0 +1,63 @@
+body main footer {
+  background: #fffef8;
+}
+
+.login {
+  width: 50%;
+  margin: auto;
+  margin-top: 150px;
+  text-align: center;
+}
+
+.login h2 {
+  margin-bottom: 30px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-top: 30px;
+}
+
+.login input {
+  height: 50px;
+  font-size: 1.4em;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.form_connection input {
+  padding-left: 10px;
+}
+
+.login label {
+  margin: 32px 0 16px 0;
+}
+
+.login textarea {
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.login form a {
+  text-align: center;
+  color: black;
+}
+
+.login_ok {
+  cursor: pointer;
+}
+
+.login_not_ok {
+  font-family: "syne";
+  font-weight: 700;
+  font-size: 1.5em;
+  color: rgb(203 18.18);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0 105px;
+}
