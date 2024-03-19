@@ -44,6 +44,8 @@ const response = await fetch("http://localhost:5678/api/categories");
 const categories = await response.json();
 console.log(categories);
 
+
+
 // Récupération des constantes
 const portfolio = document.getElementById("portfolio");
 const gallery = document.querySelector(".gallery");
@@ -54,20 +56,21 @@ buttonFilter.classList.add("buttonFilter");
 // Placement de  la div apres le portfolio
 portfolio.insertBefore(buttonFilter, gallery);
 
-
-
-
 // Suppression filter bouton et ajout du  button all
 const buttonAll = document.createElement("button");
 buttonAll.innerText = "Tous";
-buttonAll.classList.add("btn-category", "btn-all");
+buttonAll.classList.add("btn-category");
 buttonFilter.appendChild(buttonAll);
 
 // Ajout event listener bouton tous
 buttonAll.addEventListener("click", function () {
   createItemsHtml(works);
 });
+// ajout styles css
+const categoriesButtons = buttonFilter.querySelectorAll(".btn-category");
 
+buttonFilter.style.display = "flex";
+buttonFilter.style.gap = "10px";
 
 //ajouter les differentes catégories de boutons
 categories.forEach((categoryElement, i) => {
@@ -76,46 +79,29 @@ categories.forEach((categoryElement, i) => {
   categoryButtonFilter.innerText = categoryElement.name;
   categoryButtonFilter.value = categoryElement.id;
   categoryButtonFilter.classList.add("btn-category");
-
+  
   // ajout de la classe selected
   if (i === 0) {
     categoryButtonFilter.classList.add("btn_selected");
   }
   // ajout des boutons dans la div
   buttonFilter.appendChild(categoryButtonFilter);
-
-  //ajouter la catégories en fonction du clic  (event listener)
+  
+  ////////////ajouter la catégories en fonction du clic  (event listener)/////////////////////////////////////////////////
   categoryButtonFilter.addEventListener("click", function () {
     console.log(categoryElement);
     const filterWorks = works.filter(
       (work) => categoryElement.id === work.categoryId
-    );
-    console.log(filterWorks);
-    createItemsHtml(filterWorks);
+      );
+      console.log(filterWorks);
+      createItemsHtml(filterWorks);
+    });
   });
-
-  //changer la galerie selon les filters
-
-  //changer la couleur des boutons et taille des boutons
-});
-
-// .then(response => console.log(respponse))
-//   .then(response => {
-
-//     // gerer la réponse de la requete
-//     if (!response.ok) {
-//       throw new Error("erreur reseau");
-//     }
-//     return response.json();
-//   })
-//   .then((data) => {
-//     //faire qqchose avec les données
-//     console.log(data);
-//   })
-
-//   .catch((error) => {
-//     //gerer les erreurs eventuelles
-//     console.error("Pb requete fectch", error);
-//   });
-
-// loadWork ( )
+  
+  // Redirection au clic vers la page de login html
+  function redirectToLoginPage(){
+    window.location.href = 'login.html';
+  } 
+  
+  const loginButton = document.querySelector ('.login_ok');
+  loginButton.addEventListener ('click', redirectToLoginPage);
