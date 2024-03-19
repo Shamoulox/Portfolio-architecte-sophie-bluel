@@ -98,10 +98,4 @@ categories.forEach((categoryElement, i) => {
     });
   });
   
-  // Redirection au clic vers la page de login html
-  function redirectToLoginPage(){
-    window.location.href = 'login.html';
-  } 
   
-  const loginButton = document.querySelector ('.login_ok');
-  loginButton.addEventListener ('click', redirectToLoginPage);
