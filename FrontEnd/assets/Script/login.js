@@ -21,7 +21,7 @@ form.addEventListener("submit", async function (event) {
     password: password,
   };
 
-  console.log("données de connexion", userData);65
+  console.log("données de connexion", userData);
 
   // Conversion des données en json
   const request = JSON.stringify(userData);
@@ -38,6 +38,7 @@ form.addEventListener("submit", async function (event) {
     console.log(datalogin);
     
 
+    // si token ok connecté
     sessionStorage.setItem("token", datalogin.token)
     window.location.href = "index.html"
   } else {
@@ -46,11 +47,20 @@ form.addEventListener("submit", async function (event) {
 });
 
 
-// faire le lien de la page login 
 
-// si token ok connecté
+// si il y  le token : 
 
-// sinon vider sessinstorage
+
+
+// true or false
+
+
+
+
+
+
+
+// sinon vider sessionstorage
 
 
 
