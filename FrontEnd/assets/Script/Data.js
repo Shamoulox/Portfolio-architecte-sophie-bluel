@@ -2,15 +2,15 @@
 // variable global
 
 // // Appel de la promess récuperation des élements
-let works = [];
+let worksData = [];
 
-async function loadingWorks() {
+async function loadingFetchWorks() {
   const response = await fetch("http://localhost:5678/api/works");
-  works = await response.json();
+  worksData = await response.json();
   // console.log(works);
-  return works; //retour des données recupérées
+  return worksData; //retour des données recupérées
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Fonction pour créer la galerie dans le HTML
 function createItemsHtml(filterWorks) {
   // pour récupérer la  galerie et integrer Les differentes balises
@@ -38,11 +38,16 @@ function createItemsHtml(filterWorks) {
     figcaption.innerText = Element.title;
   });
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 async function loadanddisplay() {
-  await loadingWorks();
-  createItemsHtml(works);
+  await loadingFetchWorks();
+  createItemsHtml(worksData);
 }
 loadanddisplay();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //appel de la promesse et récupération des catégory
 const response = await fetch("http://localhost:5678/api/categories");
 const categories = await response.json();
@@ -68,7 +73,7 @@ buttonFilter.appendChild(buttonAll);
 
 // Ajout event listener bouton tous
 buttonAll.addEventListener("click", function () {
-  createItemsHtml(works);
+  createItemsHtml(worksData);
 });
 // ajout styles css
 const categoriesButtons = buttonFilter.querySelectorAll(".btn-category");
@@ -94,7 +99,7 @@ categories.forEach((categoryElement, i) => {
   ////////////ajouter la catégories en fonction du clic  (event listener)/////////////////////////////////////////////////
   categoryButtonFilter.addEventListener("click", function () {
     console.log(categoryElement);
-    const filterWorks = works.filter(
+    const filterWorks = worksData.filter(
       (work) => categoryElement.id === work.categoryId
       );
       console.log(filterWorks);
