@@ -1,62 +1,52 @@
-// recupération du token
-const token = window.sessionStorage.getItem("token")
+
 
 // selection des élements
-const buttonLogin = document.getElementById ("button_login");
-const buttonFilter = document.querySelector (".buttonFilter");
+const buttonLogin = document.getElementById("button_login");
+const buttonFilter = document.querySelector(".buttonFilter");
 
-console.log("buttonFilter trouvé", buttonFilter)
-
+console.log("buttonFilter trouvé", buttonFilter);
 
 // si un token est présent, cela signifie que l'utilisateur est connecté
 if (token) {
-    // modifier le texte du bouton 
-    buttonLogin.textContent = "logout";
-    //supprimer la div ButtonFilter
-if (buttonFilter) {
-    buttonFilter.remove()
-    }
-
+  // modifier le texte du bouton
+  buttonLogin.textContent = "logout";
 }
 
 /////////////////////////////////////////////////////////////////
-
-// // Modale gpt: 
 
 // Sélection du bouton "Modifier"
 const btnModifier = document.getElementById("btnModifier");
 
 // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
-btnModifier.addEventListener("click", function() {
-    afficherModale(); // Appel de la fonction pour afficher la modal
+btnModifier.addEventListener("click", function () {
+  afficherModale(); // Appel de la fonction pour afficher la modal
 });
 
-// Fonction pour afficher la modal
+const btnCloseModale = document.getElementById("closeModale");
+
+//  ajout listener
+btnCloseModale.addEventListener("click", function () {
+  closeModale();
+});
+
+// appel Fonction pour afficher la modal
 function afficherModale() {
-    document.getElementById('modale').style.display = "block";
-  }
-  
-//   fonction pour fermer la modale 
-
-  
- 
-// // Appel de la promess récuperation des élements
-let worksData2 = [];
-
-async function loadingFetchWorks() {
-  const response = await fetch("http://localhost:5678/api/works");
-  worksData2 = await response.json();
-  console.log(worksData2);
-  return worksData2; //retour des données recupérées
+  document.getElementById("modale").style.display = "block";
 }
-//   rajout des photos dans la modale 
+
+//  appel fonction pour fermer la modale
+function closeModale() {
+  document.getElementById("modale").style.display = "none";
+}
 
 
-  function chargerGalerieModal(filterWorks) {
-    const galerieModal = document.getElementById("modale-gallery");
-    galerieModal.innerHTML = ''; // Vide la galerie pour charger de nouvelles photos
+//   rajout des photos dans la modale
 
-   filterWorks.forEach((Element) => {
+function chargerGalerieModal(filterWorks) {
+  const galerieModal = document.getElementById("modale-gallery");
+  galerieModal.innerHTML = ""; // Vide la galerie pour charger de nouvelles photos
+
+  filterWorks.forEach((Element) => {
     //creation des  constantes du html
     const figure = document.createElement("figure");
     const img = document.createElement("img");
@@ -67,7 +57,19 @@ async function loadingFetchWorks() {
 
     //ajout des élements
     figure.appendChild(img);
-    figure.appendChild(figcaption);
+    // figure.appendChild(figcaption);
+
+    // création de la corbeille
+    const blackWindow = document.createElement("div");
+    blackWindow.classList.add("blackWindow");
+
+    // ajout du fontawesome corbeille
+    const trashicon = document.createElement("i");
+    trashicon.classList.add("fa-solid", "fa-trash-can");
+
+    // déplacement de l icone dans le carré noir
+    blackWindow.appendChild(trashicon);
+    figure.appendChild(blackWindow);
 
     // //configuration des attributs
     figure.dataset.categoryId = Element.categoryId;
@@ -75,26 +77,33 @@ async function loadingFetchWorks() {
     img.src = Element.imageUrl;
     img.alt = Element.title;
     figcaption.innerText = Element.title;
-  });
-       
 
-        // // Ajouter la classe pour permettre la suppression si nécessaire
-        // img.classList.add('aSupprimer');
+    ////////////////////////////////////////////////////////////////////////////////
 
-        // // Ajouter l'événement de clic pour la suppression si nécessaire
-        // img.addEventListener('click', function() {
-        //     this.parentNode.removeChild(this); // Supprimer l'image lorsque cliquée
-        // });
+    trashicon.addEventListener("click", async function () {
+      console.log("çà marche");
+      console.log(Element.id);
 
-        
-    
-
+      const response = await fetch(
+        "http://localhost:5678/api/works/" + Element.id,
+        {
+          method: "delete",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if ( response.ok){
+        loadanddisplay();
+        loadGalerieModal();
       }
+    });
+  });
+}
+// faire que les id correspondent aux images ??????
 
-      async function loadGalerieModal () {
-        await loadingFetchWorks();
-        chargerGalerieModal(worksData2)
-  
-
+async function loadGalerieModal() {
+  await loadingFetchWorks();
+  chargerGalerieModal(worksData);
 }
 loadGalerieModal();

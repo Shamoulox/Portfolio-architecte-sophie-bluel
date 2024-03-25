@@ -5,6 +5,7 @@
     <title>Sophie Bluel - Architecte d'intérieur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <script src="https://kit.fontawesome.com/5a7c239155.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
@@ -12,12 +13,6 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/Css/style.css" />
-    <script type="module" src="./assets/script/data.js">
-      defer
-    </script>
-    <script type="module" src="./assets/script/data_connected.js">
-      defer
-    </script>
   </head>
   <body>
     <header>
@@ -56,52 +51,55 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets <button class="btn_modifier" id="btnModifier">modifier</a> </button></h2>
+        <h2>
+          Mes Projets
+          <button class="btn_modifier" id="btnModifier">modifier</button>
+        </h2>
         <div class="gallery">
           <!-- <figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure> 
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure> -->
+            <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+            <figcaption>Abajour Tahina</figcaption>
+          </figure>
+          <figure> 
+            <img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
+            <figcaption>Appartement Paris V</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
+            <figcaption>Restaurant Sushisen - Londres</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
+            <figcaption>Villa “La Balisiere” - Port Louis</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
+            <figcaption>Structures Thermopolis</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
+            <figcaption>Appartement Paris X</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
+            <figcaption>Pavillon “Le coteau” - Cassis</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
+            <figcaption>Villa Ferneze - Isola d’Elba</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
+            <figcaption>Appartement Paris XVIII</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
+            <figcaption>Bar “Lullaby” - Paris</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
+            <figcaption>Hotel First Arte - New Delhi</figcaption>
+          </figure> -->
         </div>
       </section>
       <section id="contact">
@@ -126,22 +124,24 @@
         </ul>
       </nav>
     </footer>
-
     
-	<!-- Ajoutez ceci à la fin de votre body -->
-	<aside>
-<div id="modale" class="modale">
-	<div class="modale-contenu">
-	  <span class="fermer" onclick="fermerModale()">&times;</span>
-	  <h2>Galerie de photos</h2>
-	  <div id="modale-gallery" class="modale-gallery">
-		<!-- galerie de photos sera ajoutée ici dynamiquement via JavaScript -->
-	  </div>
-	  <button id="btnSupprimer" onclick="supprimerPhotos()">Supprimer</button>
-
-	  <button>ajouter une photo</button>
-	</div>
-  </div>
-</aside>
+    <aside>
+      <div id="modale" class="modale">
+        <div class="modale-contenu">
+          <div class="closed" id="closeModale">&times;</div>
+          <h2>Galerie de photos</h2>
+          <div id="modale-gallery" class="modale-gallery">
+            <!-- La galerie de photos sera ajoutée ici dynamiquement via JavaScript -->
+          </div>
+          <input type="submit" value="Ajouter une photo" id=""></span>
+        </div>
+      </div>
+    </aside>
+          <script src="./assets/script/data.js">
+            defer
+          </script>
+          <script src="./assets/script/data_connected.js">
+            defer
+          </script>
   </body>
 </html>
