@@ -1,10 +1,10 @@
-
 // variable global
 // recupération du token
 const token = window.sessionStorage.getItem("token");
 // // Appel de la promess récuperation des élements
-let worksData = [];
+// Si un token est présent, cela signifie que l'utilisateur est connecté
 
+let worksData = [];
 
 async function loadingFetchWorks() {
   const response = await fetch("http://localhost:5678/api/works");
@@ -50,44 +50,77 @@ loadanddisplay();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-async function  loadandDisplayCategories(){
-
+async function loadandDisplayCategories() {
   //appel de la promesse et récupération des catégory
   const response = await fetch("http://localhost:5678/api/categories");
   const categories = await response.json();
   console.log(categories);
-  
-  
-  
+
   // Récupération des constantes
   const portfolio = document.getElementById("portfolio");
   const gallery = document.querySelector(".gallery");
-  
+
   // Creation des boutons et de la div
   const buttonFilter = document.createElement("div");
   buttonFilter.classList.add("buttonFilter");
   // Placement de  la div apres le portfolio
   portfolio.insertBefore(buttonFilter, gallery);
-  
-  
-  if (!token ) {
+
+  /////////////////////////////////////////////////////////////////
+
+  // }
+
+  // paramétrage qd PAS connecté avec le token
+  if (!token) {
+    const btnModifier = document.getElementById("btnModifier");
+    if (btnModifier) {
+      btnModifier.style.display = "none";
+    }
+    // ajout js connected////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
+    btnModifier.addEventListener("click", function () {
+      afficherModale(); // Appel de la fonction pour afficher la modal
+    });
+
+    // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
+    btnModifier.addEventListener("click", function () {
+      afficherModale(); // Appel de la fonction pour afficher la modal
+    });
+
+    const btnCloseModale = document.getElementById("closeModale");
+
+    //  ajout listener
+    btnCloseModale.addEventListener("click", function () {
+      closeModale();
+    });
+
+    // appel Fonction pour afficher la modal
+    function afficherModale() {
+      document.getElementById("modale").style.display = "block";
+    }
+
+    //  appel fonction pour fermer la modale
+    function closeModale() {
+      document.getElementById("modale").style.display = "none";
+    }
+
     // Suppression filter bouton et ajout du  button all
     const buttonAll = document.createElement("button");
     buttonAll.innerText = "Tous";
     buttonAll.classList.add("btn-category");
     buttonFilter.appendChild(buttonAll);
-    
+
     // Ajout event listener bouton tous
     buttonAll.addEventListener("click", function () {
       createItemsHtml(worksData);
     });
     // ajout styles css
     const categoriesButtons = buttonFilter.querySelectorAll(".btn-category");
-    
+
     buttonFilter.style.display = "flex";
     buttonFilter.style.gap = "10px";
-    
+
     //ajouter les differentes catégories de boutons
     categories.forEach((categoryElement, i) => {
       //création d'un bouton par catégorie
@@ -95,28 +128,133 @@ async function  loadandDisplayCategories(){
       categoryButtonFilter.innerText = categoryElement.name;
       categoryButtonFilter.value = categoryElement.id;
       categoryButtonFilter.classList.add("btn-category");
-      
+
       // ajout de la classe selected
       if (i === 0) {
         categoryButtonFilter.classList.add("btn_selected");
       }
       // ajout des boutons dans la div
       buttonFilter.appendChild(categoryButtonFilter);
-      
+
       ////////////ajouter la catégories en fonction du clic  (event listener)/////////////////////////////////////////////////
       categoryButtonFilter.addEventListener("click", function () {
         console.log(categoryElement);
         const filterWorks = worksData.filter(
           (work) => categoryElement.id === work.categoryId
-          );
-          console.log(filterWorks);
-          createItemsHtml(filterWorks);
-        });
+        );
+        console.log(filterWorks);
+        createItemsHtml(filterWorks);
       });
+    });
   }
 }
-loadandDisplayCategories()
+loadandDisplayCategories();
 
-  
-  
-  
+////////////////////////////////////////////////
+
+// Sélection des éléments
+const buttonLogin = document.getElementById("button_login");
+const buttonFilter = document.querySelector(".buttonFilter");
+
+console.log("buttonFilter trouvé", buttonFilter);
+
+// Si un token est présent, cela signifie que l'utilisateur est connecté
+// Modifier le texte du bouton
+if (token) {
+  if (buttonLogin) {
+    buttonLogin.textContent = "Logout";
+
+    buttonLogin.addEventListener("click", function () {
+      window.sessionStorage.removeItem("token");
+
+      window.location.href = "index.html";
+    });
+  }
+}
+
+// Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
+btnModifier.addEventListener("click", function () {
+  afficherModale(); // Appel de la fonction pour afficher la modal
+});
+
+const btnCloseModale = document.getElementById("closeModale");
+
+// Ajout d'un gestionnaire d'événements pour fermer la modale
+btnCloseModale.addEventListener("click", function () {
+  closeModale();
+});
+
+// Fonction pour afficher la modal
+function afficherModale() {
+  document.getElementById("modale").style.display = "block";
+}
+
+// Fonction pour fermer la modal
+function closeModale() {
+  document.getElementById("modale").style.display = "none";
+}
+
+// Rajout des photos dans la modale
+function chargerGalerieModal(filterWorks) {
+  const galerieModal = document.getElementById("modale-gallery");
+  galerieModal.innerHTML = ""; // Vide la galerie pour charger de nouvelles photos
+
+  filterWorks.forEach((Element) => {
+    // Création des constantes du HTML
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    const figcaption = document.createElement("figcaption");
+
+    // Ajout de la galerie
+    galerieModal.appendChild(figure);
+
+    // Ajout des éléments
+    figure.appendChild(img);
+
+    // Création de la corbeille
+    const blackWindow = document.createElement("div");
+    blackWindow.classList.add("blackWindow");
+
+    // Ajout de l'icône corbeille
+    const trashicon = document.createElement("i");
+    trashicon.classList.add("fa-solid", "fa-trash-can");
+
+    // Déplacement de l'icône dans le carré noir
+    blackWindow.appendChild(trashicon);
+    figure.appendChild(blackWindow);
+
+    // Configuration des attributs
+    figure.dataset.categoryId = Element.categoryId;
+    figure.dataset.projet = Element.id;
+    img.src = Element.imageUrl;
+    img.alt = Element.title;
+    figcaption.innerText = Element.title;
+
+    // Gestionnaire d'événements pour supprimer une œuvre
+    trashicon.addEventListener("click", async function () {
+      console.log("çà marche");
+      console.log(Element.id);
+
+      const response = await fetch(
+        "http://localhost:5678/api/works/" + Element.id,
+        {
+          method: "delete",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
+      if (response.ok) {
+        loadanddisplay();
+        loadGalerieModal();
+      }
+    });
+  });
+}
+
+// Charger la galerie modale
+async function loadGalerieModal() {
+  await loadingFetchWorks();
+  chargerGalerieModal(worksData);
+}
+loadGalerieModal();

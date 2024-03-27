@@ -382,5 +382,17 @@ padding: 80px 80px 140px 80px ;
 
 }
 
+.greybar{
+  
+  position: relative;
+  text-align: center;
+  width:66%;
+  margin: auto;
+  margin-top: 200px;
+  border-top: 200px;
+  border: solid 1px #b3b3b3 ;
+
+}
+
 
 
