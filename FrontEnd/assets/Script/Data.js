@@ -1,6 +1,7 @@
 // variable global
 // recupération du token
 const token = window.sessionStorage.getItem("token");
+
 // // Appel de la promess récuperation des élements
 // Si un token est présent, cela signifie que l'utilisateur est connecté
 
@@ -12,8 +13,8 @@ async function loadingFetchWorks() {
   // console.log(works);
   return worksData; //retour des données recupérées
 }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Fonction pour créer la galerie dans le HTML
+
+///////////////////////////////////////////////////// Fonction pour créer la galerie dans le HTML////////////////////////////////////////
 function createItemsHtml(filterWorks) {
   // pour récupérer la  galerie et integrer Les differentes balises
   const gallery = document.querySelector(".gallery");
@@ -27,7 +28,6 @@ function createItemsHtml(filterWorks) {
 
     // ajout de la galerie
     gallery.appendChild(figure);
-
     //ajout des élements
     figure.appendChild(img);
     figure.appendChild(figcaption);
@@ -41,14 +41,14 @@ function createItemsHtml(filterWorks) {
   });
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////fonction pour charger et afficher les oeuvres///////////////////
 async function loadanddisplay() {
   await loadingFetchWorks();
   createItemsHtml(worksData);
 }
 loadanddisplay();
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////fonction pour charger et afficher les catégories/////////////////////
 
 async function loadandDisplayCategories() {
   //appel de la promesse et récupération des catégory
@@ -59,38 +59,28 @@ async function loadandDisplayCategories() {
   // Récupération des constantes
   const portfolio = document.getElementById("portfolio");
   const gallery = document.querySelector(".gallery");
+  const buttonFilter = document.createElement("div");
 
   // Creation des boutons et de la div
-  const buttonFilter = document.createElement("div");
   buttonFilter.classList.add("buttonFilter");
   // Placement de  la div apres le portfolio
   portfolio.insertBefore(buttonFilter, gallery);
 
-  /////////////////////////////////////////////////////////////////
+  /////////////////////////////////// paramétrage qd NON connecté avec le token////////////////////////////////
 
-  // }
-
-  // paramétrage qd PAS connecté avec le token
+  const btnModifier = document.getElementById("btnModifier");
+  const btnCloseModale = document.getElementById("closeModale");
+  /////Condition//////////////////////////////////////////////////
   if (!token) {
-    const btnModifier = document.getElementById("btnModifier");
     if (btnModifier) {
       btnModifier.style.display = "none";
     }
-    // ajout js connected////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
     btnModifier.addEventListener("click", function () {
       afficherModale(); // Appel de la fonction pour afficher la modal
     });
 
-    // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
-    btnModifier.addEventListener("click", function () {
-      afficherModale(); // Appel de la fonction pour afficher la modal
-    });
-
-    const btnCloseModale = document.getElementById("closeModale");
-
-    //  ajout listener
+    //  ajout gestionnaire d'évènements au clic sur le bouton "fermer"
     btnCloseModale.addEventListener("click", function () {
       closeModale();
     });
@@ -104,6 +94,7 @@ async function loadandDisplayCategories() {
     function closeModale() {
       document.getElementById("modale").style.display = "none";
     }
+    ///////////////parametrage bouton filtre qd NON connecté///////////////////////////////
 
     // Suppression filter bouton et ajout du  button all
     const buttonAll = document.createElement("button");
@@ -111,7 +102,7 @@ async function loadandDisplayCategories() {
     buttonAll.classList.add("btn-category");
     buttonFilter.appendChild(buttonAll);
 
-    // Ajout event listener bouton tous
+    // Ajout gestionnaire d'évènements au clic sur le  bouton "tous"
     buttonAll.addEventListener("click", function () {
       createItemsHtml(worksData);
     });
@@ -136,7 +127,7 @@ async function loadandDisplayCategories() {
       // ajout des boutons dans la div
       buttonFilter.appendChild(categoryButtonFilter);
 
-      ////////////ajouter la catégories en fonction du clic  (event listener)/////////////////////////////////////////////////
+      ////ajouter la catégories en fonction du clic  (event listener)/
       categoryButtonFilter.addEventListener("click", function () {
         console.log(categoryElement);
         const filterWorks = worksData.filter(
@@ -150,17 +141,16 @@ async function loadandDisplayCategories() {
 }
 loadandDisplayCategories();
 
-////////////////////////////////////////////////
-
 // Sélection des éléments
 const buttonLogin = document.getElementById("button_login");
 const buttonFilter = document.querySelector(".buttonFilter");
 
 console.log("buttonFilter trouvé", buttonFilter);
 
-// Si un token est présent, cela signifie que l'utilisateur est connecté
-// Modifier le texte du bouton
+/////////////////////////////////////// Paramétrage qd connecté Si un token est présent ///////////////////////////////////////////////
+// Condition
 if (token) {
+  // Modifier le texte du bouton
   if (buttonLogin) {
     buttonLogin.textContent = "Logout";
 
