@@ -134,7 +134,7 @@
           <div class="closed" id="closeModale">&times;</div>
           <h2>Galerie de photos</h2>
           <div id="modale-gallery" class="modale-gallery">
-            <!-- La galerie de photos sera ajoutée ici dynamiquement via JavaScript -->
+            <!-- La galerie de photos sera ajoutée ici dynamiquement via JS -->
           </div>
           <div class="greybar"></div>
           <input type="submit" value="Ajouter une photo" id="" />
@@ -143,7 +143,7 @@
     </aside>
     <aside>
       <div id="modale2" class="modale">
-        <div class="modale-contenu">
+        <div class="modale-contenu2">
           <div class="closed" id="closeModale2">&times;</div>
           <h2>Ajout photo</h2>
           <form id="formulaireAjoutProjet">
@@ -166,23 +166,22 @@
               </div>
               <div class="modalContent">
                 <div class="modalTitleContainer">
-                  <label class="modalTitle">Titre</label>
-                  <input type="text" id="modalTitle" name="modalTitle"
+                  <label class="textTitle">Titre</label>
+                  <input type="text" id="selectorTitle" name="modalTitle"
                   placeholder=" Titre"
                 </div>
                 <div class="modalCategoryContainer">
-                  <label class="modalCategory">Catégorie</label>
-                  <input
-                    type="text"
-                    id="modalCategory"
+                  <label class="textCategory">Catégorie</label>
+                  <select
+                    id="selectorCategory"
                     name="modalCategory"
-                    placeholder="categorie"
-                  />
+                    class="modalCategory"
+                  ></select>
                 </div>
               </div>
-                <div class="greybar2"></div>
-                  <input type="submit" value="Valider" id="" /></div>
-                
+              <div class="greybar2"></div>
+              <input type="submit" value="Valider" id="validate" />
+            </div>
           </form>
         </div>
       </div>

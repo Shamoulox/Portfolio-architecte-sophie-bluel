@@ -233,30 +233,60 @@ async function loadGalerieModal() {
 loadGalerieModal();
 
 /////Modale 2
-// Sélection du bouton "Ajouter une photo" de la première modale
+
 const addPhotoButton = document.querySelector("#modale input[type='submit']");
-
-// Sélection de la première modale
 const modale = document.getElementById("modale");
-
-// Sélection de la deuxième modale
 const modale2 = document.getElementById("modale2");
 
-// Ajout d'un gestionnaire d'événements au clic sur le bouton "Ajouter une photo" de la première modale
+// Fonction pour gérer le clic sur le bouton "Ajouter une photo" de la première modale
 addPhotoButton.addEventListener("click", function() {
-  // Cacher la première modale
-  modale.style.display = "none";
-  // Afficher la deuxième modale
-  modale2.style.display = "block";
+    // Si la première modale est ouverte
+    if (modale.style.display !== "none") {
+        // Cacher la première modale
+        modale.style.display = "none";
+        // Afficher la deuxième modale
+        modale2.style.display = "block";
+    }
 });
 
-// Sélection du bouton "Ajouter une photo" de la deuxième modale
-const addPhotoButton2 = document.querySelector("#modale2 input[type='submit']");
+// Sélection du bouton "validate" de la deuxième modale
+const validateButton2 = document.querySelector("#modale2 #validate");
 
-// Ajout d'un gestionnaire d'événements au clic sur le bouton "Ajouter une photo" de la deuxième modale
-addPhotoButton2.addEventListener("click", function() {
-  // Cacher la deuxième modale
-  modale2.style.display = "none";
-  // Afficher la première modale
-  modale.style.display = "block";
+// Fonction pour gérer le clic sur le bouton "validate" de la deuxième modale
+validateButton2.addEventListener("click", function() {
+     //valider le formulaire dans la deuxième modale
+    console.log("Formulaire dans la modale 2 validé !");
+    // Empêcher l'événement de propagation pour éviter que le clic ne se propage à la première modale
+    event.stopPropagation();
 });
+
+// Ajout d'un gestionnaire d'événements au clic sur le bouton "Valider" de la deuxième modale
+validateButton2.addEventListener("click", function(event) {
+    // évènements au  clic sur le bouton "Valider" de la deuxième modale
+    console.log("Bouton Valider de la deuxième modale cliqué !");
+    // Empêcher l'événement de propagation pour éviter que le clic ne se propage à la première modale
+    event.stopPropagation();
+});
+
+async function loadandDisplayCategories() {
+  // Récupération des catégories depuis l'API
+  const response = await fetch("http://localhost:5678/api/categories");
+  const categories = await response.json();
+
+  // Sélection de l'élément select pour les catégories
+  const selectCategory = document.getElementById("selectorCategory");
+  selectCategory.innerHTML = ''; // Vide le contenu du select pour éviter les doublons
+
+  // Parcours des catégories et ajout des options dans le select
+  categories.forEach(category => {
+    // Création d'une nouvelle option
+    const option = document.createElement("option");
+    // Assignation de la valeur et du texte de l'option
+    option.value = category.id; // Supposons que l'id de la catégorie soit utilisé comme valeur
+    option.textContent = category.name; // Supposons que 'name' soit le nom de la catégorie
+    // Ajout de l'option dans le select
+    selectCategory.appendChild(option);
+  });
+}
+
+
