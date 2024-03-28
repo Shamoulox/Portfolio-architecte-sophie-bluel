@@ -256,6 +256,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
+  margin-left: 10px;
 }
 
 footer nav ul {
@@ -287,82 +288,85 @@ footer nav ul {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding:10px 20px;
+  padding: 10px 20px;
 }
 
 .btn-category:hover {
-	background-color: #1d6154;
-	color: white;
+  background-color: #1d6154;
+  color: white;
 }
-a {text-decoration: none;}
+a {
+  text-decoration: none;
+}
 
-/* chat gpt :  */
 /* Ajoutez ces styles pour la modal */
+
+/* Modale 1 */
 .modale {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4);
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modale-contenu {
   position: relative;
   background-color: #fefefe;
-  margin: 15% auto; 
-  height: 688px;
-  padding: 20px;
+  margin: 15% auto;
+  max-height: 670px;
+  padding: 25px;
   border: 1px solid #888;
-  width: 43%; 
+  width: 43%;
+  border-radius: 10px;
+  
   height: 688px;
   min-width: 450px;
 }
 
-.modale-contenu h2{
+.modale-contenu h2 {
   text-align: center;
+  padding-top: 40px;
 }
-.modale-contenu input{
-  position: absolute;
-  bottom:20px;
+.modale-contenu input {
+  position: relative;
+  bottom: 20px;
   left: 50%;
   transform: translatex(-50%);
   height: 36px;
-  width:37.6%;
+  width: 37.6%;
   border: none;
 }
 
 .modale-gallery {
-display: flex;
-flex-wrap: wrap;
-gap: 10px;
-box-sizing: border-box;
-padding: 80px 80px 140px 80px ;
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  box-sizing: border-box;
+  padding: 80px 80px 140px 80px;
 }
 
-.modale-gallery figure{
+.modale-gallery figure {
   box-sizing: border-box;
   position: relative;
-  
 }
 
-
-.modale-gallery figure > img  {
-   height: 102.57px;
-   max-width:100%;
-   width: auto;
-   text-decoration: none;
+.modale-gallery figure > img {
+  height: 102.57px;
+  max-width: 100%;
+  width: auto;
+  text-decoration: none;
 }
 
 .blackWindow {
-  position:absolute;
-  height:17px;
-  width:17px;
+  position: absolute;
+  height: 17px;
+  width: 17px;
   background-color: black;
   display: flex;
   justify-content: center;
@@ -376,23 +380,155 @@ padding: 80px 80px 140px 80px ;
   color: white;
   position: relative;
   height: 10px;
-  
-  
-  font-size: 10px;
 
+  font-size: 10px;
 }
 
-.greybar{
-  
+.greybar {
   position: relative;
   text-align: center;
-  width:66%;
+  width: 66%;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 168px;
   border-top: 200px;
-  border: solid 1px #b3b3b3 ;
+  border: solid 1px #b3b3b3;
+  margin-bottom: 25px;
+}
+
+.greybar2 {
+  position: relative;
+  text-align: center;
+  width: 66%;
+  margin: auto;
+  margin-top: 60px;
+  border-top: 200px;
+  border: solid 1px #b3b3b3;
+  margin-bottom: 25px;
+} 
+
+.closeModale--top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/* Modale2 */
+
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.modalCategory, .modalTitle {
+  
+  margin-left: 40px;
+}
+
+.formulaireAjoutProjet {
+  display: none;
+}
+
+
+.greySquareModale2 {
+  background-color: red;
+  display: block;
+  flex-direction: column;
+  width:66% ;
+  padding: 20px 0px 20 0px;
+  margin: auto;
+}
+
+.modalTitleContainer{
+  padding-top: 40px;
+}
+#modalTitle ,#modalCategory {
+ width: 80%;
+ padding: 8px;
+ margin-top: 30px;
+ 
+ display: block;
+ text-align: center;
+ box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+
+.mountaincontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 20px;
+  min-height: 169px;
+  background-color: #e8f1f6;
+  width: 83%;
+}
+
+.fa-mountain-sun {
+  font-size:50px;
+  border: 8px solid #cbd6dc;
+  border-color: #cbd6dc;
+  border-radius: 5px;
+  color: #cbd6dc;
+  width: 68.14px;   
+  height:59.62px;
+  display: flex;    
+  justify-content: center;
+  align-items: flex-end;
+  margin: 2px;
+
+
+
+
 
 }
 
 
+#modalAddImageCategory{
+	margin-bottom: 25px;
+}
 
+.ImgUploadBtn {
+	background-color: rgb(183 180 180);
+	border: solid rgb(183 180 180);
+	color: rgb(99, 99, 179);
+	font-size: 12px;
+	cursor: pointer;
+  
+  width:37.6%;
+}
+
+.AddPicturePhrase{
+	cursor: pointer;
+	margin: 2% 30%;
+	padding: 7px 0 7px 0;
+	border-radius: 30px;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+  background-color: #cbd6dc;
+  border:none; 
+  color:#306685;
+}
+
+.imgFormatAlert{
+	display: flex;
+	justify-content: center;
+	font-size: 8px;
+}
+
+#imageUrl{
+	display: none;
+}
+
+#boutonValidation{
+	margin-top: 25px;
+	color: white;
+	background-color: grey;
+	border: grey;
+}
+
+#boutonValidation.active{
+	background-color: #1D6154;;
+}

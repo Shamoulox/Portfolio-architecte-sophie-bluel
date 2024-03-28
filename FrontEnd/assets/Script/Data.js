@@ -1,4 +1,3 @@
-// variable global
 // recupération du token
 const token = window.sessionStorage.getItem("token");
 
@@ -21,7 +20,7 @@ function createItemsHtml(filterWorks) {
   gallery.innerHTML = "";
 
   filterWorks.forEach((Element) => {
-    //creation des  constantes du html
+    //récupération des  constantes du html
     const figure = document.createElement("figure");
     const img = document.createElement("img");
     const figcaption = document.createElement("figcaption");
@@ -41,14 +40,14 @@ function createItemsHtml(filterWorks) {
   });
 }
 
-//////////////////////////////////////////////fonction pour charger et afficher les oeuvres///////////////////
+//////////////////////////////////////////////fonction pour charger et afficher les oeuvres//////////////////////////////////////////////
 async function loadanddisplay() {
   await loadingFetchWorks();
   createItemsHtml(worksData);
 }
 loadanddisplay();
 
-/////////////////////////////////////////fonction pour charger et afficher les catégories/////////////////////
+/////////////////////////////////////////fonction pour charger et afficher les catégories////////////////////////////////////////////////
 
 async function loadandDisplayCategories() {
   //appel de la promesse et récupération des catégory
@@ -66,7 +65,7 @@ async function loadandDisplayCategories() {
   // Placement de  la div apres le portfolio
   portfolio.insertBefore(buttonFilter, gallery);
 
-  /////////////////////////////////// paramétrage qd NON connecté avec le token////////////////////////////////
+  /////////////////////////////////// paramétrage qd NON connecté avec le token///////////////////////////////////////////////////////////
 
   const btnModifier = document.getElementById("btnModifier");
   const btnCloseModale = document.getElementById("closeModale");
@@ -75,27 +74,7 @@ async function loadandDisplayCategories() {
     if (btnModifier) {
       btnModifier.style.display = "none";
     }
-    // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
-    btnModifier.addEventListener("click", function () {
-      afficherModale(); // Appel de la fonction pour afficher la modal
-    });
-
-    //  ajout gestionnaire d'évènements au clic sur le bouton "fermer"
-    btnCloseModale.addEventListener("click", function () {
-      closeModale();
-    });
-
-    // appel Fonction pour afficher la modal
-    function afficherModale() {
-      document.getElementById("modale").style.display = "block";
-    }
-
-    //  appel fonction pour fermer la modale
-    function closeModale() {
-      document.getElementById("modale").style.display = "none";
-    }
-    ///////////////parametrage bouton filtre qd NON connecté///////////////////////////////
-
+   
     // Suppression filter bouton et ajout du  button all
     const buttonAll = document.createElement("button");
     buttonAll.innerText = "Tous";
@@ -138,6 +117,7 @@ async function loadandDisplayCategories() {
       });
     });
   }
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 loadandDisplayCategories();
 
@@ -147,27 +127,27 @@ const buttonFilter = document.querySelector(".buttonFilter");
 
 console.log("buttonFilter trouvé", buttonFilter);
 
-/////////////////////////////////////// Paramétrage qd connecté Si un token est présent ///////////////////////////////////////////////
+/////////////////////////////////////// Paramétrage qd connecté (token présent) ///////////////////////////////////////////////
 // Condition
 if (token) {
   // Modifier le texte du bouton
   if (buttonLogin) {
     buttonLogin.textContent = "Logout";
-
     buttonLogin.addEventListener("click", function () {
       window.sessionStorage.removeItem("token");
-
       window.location.href = "index.html";
     });
   }
 }
+///////////////////////////////////////////////////////////////Modale/////////////////////////////////////////////////////////
+// Sélection des elements 
+
+const btnCloseModale = document.getElementById("closeModale");
 
 // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
 btnModifier.addEventListener("click", function () {
   afficherModale(); // Appel de la fonction pour afficher la modal
 });
-
-const btnCloseModale = document.getElementById("closeModale");
 
 // Ajout d'un gestionnaire d'événements pour fermer la modale
 btnCloseModale.addEventListener("click", function () {
@@ -177,6 +157,7 @@ btnCloseModale.addEventListener("click", function () {
 // Fonction pour afficher la modal
 function afficherModale() {
   document.getElementById("modale").style.display = "block";
+  document.getElementById ("closeModale").classList.add("closeModale--top-right");
 }
 
 // Fonction pour fermer la modal
@@ -220,7 +201,9 @@ function chargerGalerieModal(filterWorks) {
     img.alt = Element.title;
     figcaption.innerText = Element.title;
 
-    // Gestionnaire d'événements pour supprimer une œuvre
+    /////////////////////////////////////////////////////////////////////////////
+
+    // Gestionnaire d'événements au clic sur le bouton "Corbeile" pour supprimer une œuvre
     trashicon.addEventListener("click", async function () {
       console.log("çà marche");
       console.log(Element.id);
@@ -248,3 +231,32 @@ async function loadGalerieModal() {
   chargerGalerieModal(worksData);
 }
 loadGalerieModal();
+
+/////Modale 2
+// Sélection du bouton "Ajouter une photo" de la première modale
+const addPhotoButton = document.querySelector("#modale input[type='submit']");
+
+// Sélection de la première modale
+const modale = document.getElementById("modale");
+
+// Sélection de la deuxième modale
+const modale2 = document.getElementById("modale2");
+
+// Ajout d'un gestionnaire d'événements au clic sur le bouton "Ajouter une photo" de la première modale
+addPhotoButton.addEventListener("click", function() {
+  // Cacher la première modale
+  modale.style.display = "none";
+  // Afficher la deuxième modale
+  modale2.style.display = "block";
+});
+
+// Sélection du bouton "Ajouter une photo" de la deuxième modale
+const addPhotoButton2 = document.querySelector("#modale2 input[type='submit']");
+
+// Ajout d'un gestionnaire d'événements au clic sur le bouton "Ajouter une photo" de la deuxième modale
+addPhotoButton2.addEventListener("click", function() {
+  // Cacher la deuxième modale
+  modale2.style.display = "none";
+  // Afficher la première modale
+  modale.style.display = "block";
+});
