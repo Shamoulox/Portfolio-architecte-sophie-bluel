@@ -277,6 +277,12 @@ async function loadandDisplayCategories() {
   const selectCategory = document.getElementById("selectorCategory");
   selectCategory.innerHTML = ''; // Vide le contenu du select pour éviter les doublons
 
+  // Ajout d'une première option vide
+  const emptyOption = document.createElement("option");
+  emptyOption.value = ""; // Valeur vide
+  emptyOption.textContent = ""; // Texte vide
+  selectCategory.appendChild(emptyOption);
+
   // Parcours des catégories et ajout des options dans le select
   categories.forEach(category => {
     // Création d'une nouvelle option
@@ -288,5 +294,6 @@ async function loadandDisplayCategories() {
     selectCategory.appendChild(option);
   });
 }
+
 
 

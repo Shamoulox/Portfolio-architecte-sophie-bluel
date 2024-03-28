@@ -400,7 +400,7 @@ a {
 .greybar2 {
   position: relative;
   text-align: center;
-  width: 83%;
+  width: 66%;
   margin: auto;
   margin-top: 140px;
   border-top: 200px;
@@ -466,8 +466,10 @@ a {
   padding-top: 30px;
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
+  margin-left: 100px;
   gap: 15px;
+  width:72%
+  
 }
 /*  */
 .modalCategory {
@@ -501,7 +503,7 @@ a {
   margin-top: 20px;
   min-height: 169px;
   background-color: #e8f1f6;
-  width: 83%;
+  width: 66%;
 }
 
 .fa-mountain-sun {
