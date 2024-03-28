@@ -256,7 +256,7 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
-  margin-left: 10px;
+  
 }
 
 footer nav ul {
@@ -446,8 +446,7 @@ a {
 .modale-contenu2 #validate {
   position: relative;
   bottom: 20px;
-  left: 50%;
-  transform: translatex(-50%);
+  
   height: 36px;
   width: 37.6%;
   border: none;
