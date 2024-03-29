@@ -421,14 +421,6 @@ a {
   flex-direction: column;
 }
 
-/* .modalCategory,
-#modalTitle {
-  margin-left: 40px;
-} */
-
-.formulaireAjoutProjet {
-  display: none;
-}
 
 .modale-contenu2 {
   position: relative;
@@ -467,12 +459,13 @@ a {
   flex-direction: column;
   margin-left: 100px;
   gap: 15px;
-  width:72%
+  width: 66%;
+  margin:auto;
   
 }
 /*  */
 .modalCategory {
-  width: 89%;
+  width:100%;
   padding: 8px;
   margin-top: 15px;
   display: block;
@@ -481,7 +474,7 @@ a {
 }
 
 #selectorTitle {
-  width: 86%;
+  width:96.5%;
   padding: 8px;
   /* margin-top: 15px; */
   text-align: center;
@@ -557,4 +550,17 @@ a {
   color: white;
   background-color: grey;
   border: grey;
+}
+
+.selected-image{
+position: absolute;
+
+}
+.image-preview{
+  position: relative;
+  max-height:169px;
+  width:129px;
+  display: block;
+
+
 }

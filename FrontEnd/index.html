@@ -58,52 +58,7 @@
           Mes Projets
           <button class="btn_modifier" id="btnModifier">modifier</button>
         </h2>
-        <div class="gallery">
-          <!-- <figure>
-            <img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-            <figcaption>Abajour Tahina</figcaption>
-          </figure>
-          <figure> 
-            <img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-            <figcaption>Appartement Paris V</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-            <figcaption>Restaurant Sushisen - Londres</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-            <figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-            <figcaption>Structures Thermopolis</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-            <figcaption>Appartement Paris X</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-            <figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-            <figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-            <figcaption>Appartement Paris XVIII</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-            <figcaption>Bar “Lullaby” - Paris</figcaption>
-          </figure>
-          <figure>
-            <img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-            <figcaption>Hotel First Arte - New Delhi</figcaption>
-          </figure> -->
-        </div>
+        <div class="gallery"></div>
       </section>
       <section id="contact">
         <h2>Contact</h2>
@@ -131,11 +86,15 @@
     <aside>
       <div id="modale" class="modale">
         <div class="modale-contenu">
-          <div class="closed" id="closeModale">&times;</div>
-          <h2>Galerie de photos</h2>
-          <div id="modale-gallery" class="modale-gallery">
-            <!-- La galerie de photos sera ajoutée ici dynamiquement via JS -->
+          <div
+            class="closed closeModale closeModale--top-right"
+            close
+            id="closeModale"
+          >
+            &times;
           </div>
+          <h2>Galerie de photos</h2>
+          <div id="modale-gallery" class="modale-gallery"></div>
           <div class="greybar"></div>
           <input type="submit" value="Ajouter une photo" id="" />
         </div>
@@ -144,7 +103,7 @@
     <aside>
       <div id="modale2" class="modale">
         <div class="modale-contenu2">
-          <div class="closed" id="closeModale2">&times;</div>
+          <div class="closed closeModale2" close id="closeModale2">&times;</div>
           <h2>Ajout photo</h2>
           <form id="formulaireAjoutProjet">
             <div class="modale-gallery2">

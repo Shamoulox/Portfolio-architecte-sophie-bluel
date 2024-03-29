@@ -48,8 +48,10 @@ async function loadanddisplay() {
 loadanddisplay();
 
 /////////////////////////////////////////fonction pour charger et afficher les catégories////////////////////////////////////////////////
+let categoriesLoaded =false;
 
 async function loadandDisplayCategories() {
+  if(!categoriesLoaded){
   //appel de la promesse et récupération des catégory
   const response = await fetch("http://localhost:5678/api/categories");
   const categories = await response.json();
@@ -68,7 +70,8 @@ async function loadandDisplayCategories() {
   /////////////////////////////////// paramétrage qd NON connecté avec le token///////////////////////////////////////////////////////////
 
   const btnModifier = document.getElementById("btnModifier");
-  const btnCloseModale = document.getElementById("closeModale");
+  
+  
   /////Condition//////////////////////////////////////////////////
   if (!token) {
     if (btnModifier) {
@@ -117,6 +120,9 @@ async function loadandDisplayCategories() {
       });
     });
   }
+  // mettre à true pour indiquer que les catégories ont été chargées
+  categoriesLoaded = true 
+}
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 loadandDisplayCategories();
@@ -143,26 +149,34 @@ if (token) {
 // Sélection des elements 
 
 const btnCloseModale = document.getElementById("closeModale");
+const btnCloseModale2 = document.getElementById("closeModale2")
 
 // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
 btnModifier.addEventListener("click", function () {
   afficherModale(); // Appel de la fonction pour afficher la modal
 });
 
-// Ajout d'un gestionnaire d'événements pour fermer la modale
+// Ajout d'un gestionnaire d'événements pour fermer la modale1 et 2
 btnCloseModale.addEventListener("click", function () {
   closeModale();
+});
+btnCloseModale2.addEventListener("click", function () {
+  closeModale2();
 });
 
 // Fonction pour afficher la modal
 function afficherModale() {
   document.getElementById("modale").style.display = "block";
   document.getElementById ("closeModale").classList.add("closeModale--top-right");
+  document.getElementById ("closeModale2").classList.add("closeModale--top-right");
 }
 
-// Fonction pour fermer la modal
+// Fonction pour fermer la modal1 et 2
 function closeModale() {
   document.getElementById("modale").style.display = "none";
+}
+function closeModale2() {
+  document.getElementById("modale2").style.display = "none";
 }
 
 // Rajout des photos dans la modale
@@ -294,6 +308,40 @@ async function loadandDisplayCategories() {
     selectCategory.appendChild(option);
   });
 }
+// Sélection de l'élément input de type fichier
+const inputImage = document.getElementById("imageUrl");
+
+// Sélection du conteneur de montagne
+const mountainContainer = document.querySelector(".mountaincontainer");
+
+// Ajout d'un gestionnaire d'événements pour détecter le changement de fichier
+inputImage.addEventListener("change", function(event) {
+    // Récupérer le fichier sélectionné
+    const selectedFile = event.target.files[0];
+
+    // Vérifier si un fichier a été sélectionné
+    if (selectedFile) {
+        // Créer un nouvel élément div pour afficher l'image sélectionnée
+        const imageDiv = document.createElement("div");
+        imageDiv.classList.add("selected-image");
+
+        // Créer un élément img pour afficher l'image
+        const imageElement = document.createElement("img");
+        imageElement.classList.add("image-preview");
+
+        // Créer un objet URL pour l'image sélectionnée
+        const imageURL = URL.createObjectURL(selectedFile);
+
+        // Définir l'attribut src de l'élément img
+        imageElement.src = imageURL;
+
+        // Ajouter l'élément img à l'élément div
+        imageDiv.appendChild(imageElement);
+
+        // Ajouter la div au conteneur de montagne
+        mountainContainer.appendChild(imageDiv);
+    }
+});
 
 
 
