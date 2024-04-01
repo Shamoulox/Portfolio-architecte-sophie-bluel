@@ -49,12 +49,13 @@ loadanddisplay();
 
 /////////////////////////////////////////fonction pour charger et afficher les catégories////////////////////////////////////////////////
 let categoriesLoaded = false;
+let categories = []
 let btnModifier = document.getElementById("btnModifier");
-async function loadandDisplayCategories() {
+async function loadandDisplayCategories () {
   if (!categoriesLoaded) {
     //appel de la promesse et récupération des catégory
     const response = await fetch("http://localhost:5678/api/categories");
-    const categories = await response.json();
+    categories = await response.json();
     console.log(categories);
 
     // Récupération des constantes
@@ -115,6 +116,8 @@ async function loadandDisplayCategories() {
     }
     // mettre à true pour indiquer que les catégories ont été chargées
     categoriesLoaded = true;
+  displayCategoriesModal2() ;
+
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
@@ -295,24 +298,26 @@ validateButton2.addEventListener("click", async function (event) {
   // Vérifier si une image a été sélectionnée
   if (imageFile) {
       // Créer un objet FormData pour envoyer et stocker les données du formulaire
-      const formData = new FormData();
+      const formData = new FormData ();
       formData.append("title", title);
-      formData.append("categoryId", category);
-      formData.append("imageFile", imageFile);
+      formData.append("category", category);
+      formData.append("image", imageFile);
+      
 
       try {
           // Envoi de la requête POST à l'API
+          
           const response = await fetch("http://localhost:5678/api/works", {
               method: "POST",
               headers: {
                   Authorization: "Bearer " + token, 
               },
-              body: formData, // Utilisation de l'objet FormData comme corps de la requête
+              body: formData // Utilisation de l'objet FormData comme corps de la requête
           });
 
           // Vérification de la réponse
           if (response.ok) {
-              // Si la requête a réussi, vous pouvez effectuer les actions supplémentaires nécessaires, par exemple recharger la galerie
+              // Si la requête a réussi,  effectuer les actions supplémentaires nécessaires, par exemple recharger la galerie
               loadanddisplay();
               loadGalerieModal();
               console.log("Données envoyées avec succès !");
@@ -373,9 +378,8 @@ validateButton2.addEventListener("click", async function (event) {
 }
 
 // Récupération des catégories depuis l'API pour rajouter les selecteurs dans la modale2
-async function loadandDisplayCategories() {
-  const response = await fetch("http://localhost:5678/api/categories");
-  const categories = await response.json();
+ function displayCategoriesModal2() {
+ 
 
   // Sélection de l'élément select pour les catégories
   const selectCategory = document.getElementById("selectorCategory");
