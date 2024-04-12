@@ -257,7 +257,6 @@ input[type="submit"] {
   width: 180px;
   text-align: center;
   border-radius: 60px;
-  
 }
 
 footer nav ul {
@@ -422,7 +421,6 @@ a {
   flex-direction: column;
 }
 
-
 .modale-contenu2 {
   position: relative;
   background-color: #fefefe;
@@ -439,7 +437,7 @@ a {
 .modale-contenu2 #validate {
   position: relative;
   bottom: 20px;
-  
+
   height: 36px;
   width: 37.6%;
   border: none;
@@ -461,12 +459,11 @@ a {
   margin-left: 100px;
   gap: 15px;
   width: 66%;
-  margin:auto;
-  
+  margin: auto;
 }
 /*  */
 .modalCategory {
-  width:100%;
+  width: 100%;
   padding: 8px;
   margin-top: 15px;
   display: block;
@@ -475,11 +472,12 @@ a {
 }
 
 #selectorTitle {
-  width:96.5%;
+  width: 96.5%;
   padding: 8px;
   /* margin-top: 15px; */
   text-align: center;
   box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  border: none;
 }
 /*  */
 
@@ -534,6 +532,7 @@ a {
   background-color: #cbd6dc;
   border: none;
   color: #306685;
+  text-align: center;
 }
 
 .imgFormatAlert {
@@ -553,34 +552,28 @@ a {
   border: grey;
 }
 
-.selected-image{
-position: absolute;
-
+.selected-image {
+  position: absolute;
 }
-.image-preview{
+.image-preview {
   position: relative;
-  max-height:169px;
-  width:129px;
+  max-height: 169px;
+  width: 129px;
   display: block;
 }
 
-
-
-#projectTitle{
+#projectTitle {
   display: inline-block;
 }
 
-.btn_modifier{
+.btn_modifier {
   display: inline-block;
-  margin-left:10px;
+  margin-left: 10px;
   text-decoration: none;
-  Border: none;
+  border: none;
   margin-right: 5px;
-
 }
 
-.btn_modifier fa{
-  
+.btn_modifier fa {
   margin-right: 5px;
-
 }

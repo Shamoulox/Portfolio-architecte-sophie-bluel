@@ -36,39 +36,22 @@ form.addEventListener("submit", async function (event) {
   if (response.ok) {
     const datalogin = await response.json();
     console.log(datalogin);
-    
 
     // si token ok connecté
-    sessionStorage.setItem("token", datalogin.token)
-    window.location.href = "index.html"
+    sessionStorage.setItem("token", datalogin.token);
+    window.location.href = "index.html";
   } else {
     alert("saisi incorrect");
   }
 });
 
-
-
-// si il y  le token : 
-
-
+// si il y  le token :
 
 // true or false
 
-
-
-
-
-
-
 // sinon vider sessionstorage
 
-
-
-// faire la modale  de suppression 
-
-
-
-
+// faire la modale  de suppression
 
 // commencer par suppression
 

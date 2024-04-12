@@ -56,8 +56,8 @@ body main footer {
 }
 
 footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    padding: 0 105px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0 105px;
 }

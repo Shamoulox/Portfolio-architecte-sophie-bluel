@@ -9,7 +9,8 @@ let worksData = [];
 async function loadingFetchWorks() {
   const response = await fetch("http://localhost:5678/api/works");
   worksData = await response.json();
-  // console.log(works);
+
+  console.log(worksData, "workdata");
   return worksData; //retour des données recupérées
 }
 
@@ -49,14 +50,17 @@ loadanddisplay();
 
 /////////////////////////////////////////fonction pour charger et afficher les catégories////////////////////////////////////////////////
 let categoriesLoaded = false;
-let categories = []
+let categories = [];
+
+console.log(categories, "categorie çà marche");
+
 let btnModifier = document.getElementById("btnModifier");
-async function loadandDisplayCategories () {
+async function loadandDisplayCategories() {
   if (!categoriesLoaded) {
     //appel de la promesse et récupération des catégory
     const response = await fetch("http://localhost:5678/api/categories");
     categories = await response.json();
-    console.log(categories);
+    console.log(categories, "categories");
 
     // Récupération des constantes
     const portfolio = document.getElementById("portfolio");
@@ -116,8 +120,7 @@ async function loadandDisplayCategories () {
     }
     // mettre à true pour indiquer que les catégories ont été chargées
     categoriesLoaded = true;
-  displayCategoriesModal2() ;
-
+    displayCategoriesModal2();
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
@@ -160,6 +163,7 @@ if (token) {
 
   const btnCloseModale = document.getElementById("closeModale");
   const btnCloseModale2 = document.getElementById("closeModale2");
+  const btnReturn = document.getElementById("returnBack");
 
   // Ajout d'un gestionnaire d'événements au clic sur le bouton "Modifier"
   btnModifier.addEventListener("click", function () {
@@ -172,6 +176,26 @@ if (token) {
   });
   btnCloseModale2.addEventListener("click", function () {
     closeModale2();
+    document.getElementById("imageUrl").value = "";
+    const selectedImageDiv = document.querySelector(".selected-image");
+    if (selectedImageDiv) {
+      selectedImageDiv.remove();
+    }
+    // Afficher le label pour ajouter une photo
+    addPhotoLabel.style.display = "block";
+  });
+  btnReturn.addEventListener("click", function () {
+    // masquer modale 2
+    document.getElementById("modale2").style.display = "none";
+    // afficher modele 1
+    document.getElementById("modale").style.display = "block";
+    document.getElementById("imageUrl").value = "";
+    const selectedImageDiv = document.querySelector(".selected-image");
+    if (selectedImageDiv) {
+      selectedImageDiv.remove();
+    }
+    // Afficher le label pour ajouter une photo
+    addPhotoLabel.style.display = "block";
   });
 
   // Fonction pour afficher la modal
@@ -260,7 +284,7 @@ if (token) {
   }
   loadGalerieModal();
 
-  /////Modale 2
+  /////Modale 2///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const addPhotoButton = document.querySelector("#modale input[type='submit']");
   const modale = document.getElementById("modale");
@@ -279,69 +303,81 @@ if (token) {
 
   // Sélection du bouton "validate" de la deuxième modale
   const validateButton2 = document.querySelector("#modale2 #validate");
-  
+
   // Fonction pour gérer le clic sur le bouton "validate" de la deuxième modale
-validateButton2.addEventListener("click", async function (event) {
-  event.preventDefault();
-  // Récupérer les valeurs du titre et de la catégorie à l'intérieur de cette fonction
-  const title = document.getElementById("selectorTitle").value;
-  const category = document.getElementById("selectorCategory").value;
-  
-  // Valider le formulaire dans la deuxième modale
-  console.log("Formulaire dans la modale 2 validé !");
-  // Empêcher l'événement de propagation pour éviter que le clic ne se propage à la première modale
-  event.stopPropagation();
+  validateButton2.addEventListener("click", async function (event) {
+    event.preventDefault();
+    // Récupérer les valeurs du titre et de la catégorie à l'intérieur de cette fonction
+    const title = document.getElementById("selectorTitle").value;
+    const category = document.getElementById("selectorCategory").value;
 
-  // Récupérer le fichier image sélectionné
-  const imageFile = document.getElementById("imageUrl").files[0];
+    // Valider le formulaire dans la deuxième modale
+    console.log("Formulaire dans la modale 2 validé !");
+    // Empêcher l'événement de propagation pour éviter que le clic ne se propage à la première modale
+    event.stopPropagation();
 
-  // Vérifier si une image a été sélectionnée
-  if (imageFile) {
+    // Récupérer le fichier image sélectionné
+    const imageFile = document.getElementById("imageUrl").files[0];
+
+    // Vérifier si les champs sont vides
+    if (!title || !category || !imageFile) {
+      // Changer la couleur du bouton de validation
+      validateButton2.style.backgroundColor = "#A7A7A7a7";
+      console.error("Veuillez remplir tous les champs !");
+      alert("veuillez remplir tous les champs !");
+      return; // Arrêter l'exécution de la fonction si les champs sont vides
+    }
+
+    // Réinitialiser la couleur du bouton de validation
+    validateButton2.style.backgroundColor = "";
+
+    // Vérifier si une image a été sélectionnée
+    if (imageFile) {
       // Créer un objet FormData pour envoyer et stocker les données du formulaire
-      const formData = new FormData ();
+      const formData = new FormData();
       formData.append("title", title);
       formData.append("category", category);
       formData.append("image", imageFile);
-      
 
       try {
-          // Envoi de la requête POST à l'API
-          
-          const response = await fetch("http://localhost:5678/api/works", {
-              method: "POST",
-              headers: {
-                  Authorization: "Bearer " + token, 
-              },
-              body: formData // Utilisation de l'objet FormData comme corps de la requête
-          });
+        // Envoi de la requête POST à l'API
 
-          // Vérification de la réponse
-          if (response.ok) {
-              // Si la requête a réussi,  effectuer les actions supplémentaires nécessaires, par exemple recharger la galerie
-              loadanddisplay();
-              loadGalerieModal();
-              console.log("Données envoyées avec succès !");
-          } else {
-              console.error("Erreur lors de l'envoi des données :", response.status, response.statusText);
-          }
+        const response = await fetch("http://localhost:5678/api/works", {
+          method: "POST",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+          body: formData, // Utilisation de l'objet FormData comme corps de la requête
+        });
+
+        // Vérification de la réponse
+        if (response.ok) {
+          // Si la requête a réussi,  effectuer les actions supplémentaires nécessaires, par exemple recharger la galerie
+          loadanddisplay();
+          loadGalerieModal();
+          console.log("Données envoyées avec succès !");
+        } else {
+          console.error(
+            "Erreur lors de l'envoi des données :",
+            response.status,
+            response.statusText
+          );
+        }
       } catch (error) {
-          console.error("Erreur lors de la requête fetch :", error);
+        console.error("Erreur lors de la requête fetch :", error);
       }
-  } else {
+    } else {
       console.error("Aucune image sélectionnée !");
-  }
-});
+    }
+  });
 
-
-  
   // Sélection de l'élément input de type fichier
   const inputImage = document.getElementById("imageUrl");
 
   // Sélection du conteneur de montagne
   const mountainContainer = document.querySelector(".mountaincontainer");
 
-  const addPhotoLabel= document.querySelector(".AddPicturePhrase");
-
+  const addPhotoLabel = document.querySelector(".AddPicturePhrase");
 
   // Ajout d'un gestionnaire d'événements pour détecter le changement de fichier
   inputImage.addEventListener("change", function (event) {
@@ -370,17 +406,14 @@ validateButton2.addEventListener("click", async function (event) {
       // Ajouter la div au conteneur de montagne
       mountainContainer.appendChild(imageDiv);
 
-      // Masquer le label ajouter photo 
+      // Masquer le label ajouter photo
       addPhotoLabel.style.display = "none";
-
     }
   });
 }
 
 // Récupération des catégories depuis l'API pour rajouter les selecteurs dans la modale2
- function displayCategoriesModal2() {
- 
-
+function displayCategoriesModal2() {
   // Sélection de l'élément select pour les catégories
   const selectCategory = document.getElementById("selectorCategory");
   selectCategory.innerHTML = ""; // Vide le contenu du select pour éviter les doublons
